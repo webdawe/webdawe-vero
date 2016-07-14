@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<layout version="1.0.0">
+  <!--Customer Queue Index -->
+    <adminhtml_vero_customer_index>
+    <reference name="content">
+      <block type="webdawe_vero/adminhtml_vero_customer" name="adminhtml_vero_customer_queue" />
+    </reference>
+    </adminhtml_vero_customer_index>
+    <adminhtml_vero_customer_history_index>
+        <reference name="content">
+            <block type="webdawe_vero/adminhtml_vero_customer_history" name="adminhtml_vero_customer_history" />
+        </reference>
+    </adminhtml_vero_customer_history_index>
+    <adminhtml_vero_order_index>
+        <reference name="content">
+            <block type="webdawe_vero/adminhtml_vero_order" name="adminhtml_vero_order_queue" />
+        </reference>
+    </adminhtml_vero_order_index>
+    <adminhtml_vero_quote_index>
+        <reference name="content">
+            <block type="webdawe_vero/adminhtml_vero_quote" name="adminhtml_vero_quote_queue" />
+        </reference>
+    </adminhtml_vero_quote_index>
+</layout>
+

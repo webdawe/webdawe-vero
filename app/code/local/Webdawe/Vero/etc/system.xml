@@ -1,0 +1,188 @@
+<?xml version="1.0"?>
+<config>
+	  <tabs>
+		<webdawe_vero translate="label" module="webdawe_vero">
+            <label>Vero</label>
+            <sort_order>200</sort_order>
+        </webdawe_vero>
+	  </tabs>
+	  <sections>
+		<webdawe_vero translate="label" module="webdawe_vero">
+		<label>Vero Settings</label>
+		<tab>webdawe_vero</tab>
+		<frontend_type>text</frontend_type>
+		<sort_order>1</sort_order>
+		<show_in_default>1</show_in_default>
+		<show_in_website>1</show_in_website>
+		<show_in_store>1</show_in_store>            
+			<groups>
+			  <general translate="label"> 
+				  <label>General</label>
+				  <frontend_type>text</frontend_type>
+				  <sort_order>0</sort_order>
+				  <show_in_default>1</show_in_default>
+				  <show_in_website>1</show_in_website>
+				  <show_in_store>1</show_in_store>
+				   <fields>
+						<enabled translate="label" module="webdawe_vero">
+						<label>Enabled</label>
+						<frontend_type>select</frontend_type>
+						<source_model>adminhtml/system_config_source_yesno</source_model>
+						<sort_order>0</sort_order>
+						<show_in_default>1</show_in_default>
+						<show_in_website>1</show_in_website>
+						<show_in_store>1</show_in_store>
+						<comment>Enable / Disable Vero Module</comment>
+						</enabled>
+					   <debug translate="label" module="webdawe_vero">
+						   <label>Debug Mode</label>
+						   <frontend_type>select</frontend_type>
+						   <source_model>adminhtml/system_config_source_yesno</source_model>
+						   <sort_order>1</sort_order>
+						   <show_in_default>1</show_in_default>
+						   <show_in_website>1</show_in_website>
+						   <show_in_store>1</show_in_store>
+						   <comment>Enable / Disable Debug Mode</comment>
+					   </debug>
+					   <website_prefix translate="label" module="webdawe_vero">
+						   <label>Website Prefix</label>
+						   <frontend_type>text</frontend_type>
+						   <sort_order>2</sort_order>
+						   <show_in_default>1</show_in_default>
+						   <show_in_website>1</show_in_website>
+						   <show_in_store>1</show_in_store>
+						   <comment>This Prefix will be removed from Website name and Tag customer</comment>
+					   </website_prefix>
+				   </fields>
+			   </general>
+			   <api translate="label">
+				  <label>Project API Credentials</label>
+				  <frontend_type>text</frontend_type>
+				  <sort_order>2</sort_order>
+				  <show_in_default>1</show_in_default>
+				  <show_in_website>1</show_in_website>
+				  <show_in_store>1</show_in_store>
+				  <comment><![CDATA[You can find the credentials from <a href="https://app.getvero.com/settings/project" target="_blank">Vero</a> ]]></comment>
+				   <fields>
+				   	 <key translate="label" module="webdawe_vero">
+						<label>API Key</label>
+						<frontend_type>password</frontend_type>
+						<sort_order>50</sort_order>
+						<show_in_default>1</show_in_default>
+						<show_in_website>1</show_in_website>
+						<show_in_store>1</show_in_store>
+						<validate>required-entry</validate>
+					</key>
+					 <auth_token translate="label" module="webdawe_vero">
+						<label>Auth Token</label>
+						<frontend_type>text</frontend_type>
+						<sort_order>60</sort_order>
+						<show_in_default>1</show_in_default>
+						<show_in_website>1</show_in_website>
+						<show_in_store>1</show_in_store>
+						<validate>required-entry</validate>
+					</auth_token>
+				   </fields>
+			   </api>
+			   <sync_settings>
+				   <label>Sync Settings</label>
+				   <frontend_type>text</frontend_type>
+				   <sort_order>3</sort_order>
+				   <show_in_default>1</show_in_default>
+				   <show_in_website>1</show_in_website>
+				   <show_in_store>1</show_in_store>
+				   <fields>
+					   <maximum_attempts translate="label" module="webdawe_vero">
+						   <label>Maximum Attempts</label>
+						   <frontend_type>text</frontend_type>
+						   <sort_order>0</sort_order>
+						   <show_in_default>1</show_in_default>
+						   <show_in_website>1</show_in_website>
+						   <show_in_store>1</show_in_store>
+						   <comment>Maximum Sync Attempts</comment>
+						   <validate>required-entry validate-digits-range digits-range-1</validate>
+					   </maximum_attempts>
+					   <maximum_records translate="label tooltip" module="webdawe_vero">
+						   <label>Maximum Records</label>
+						   <frontend_type>text</frontend_type>
+						   <sort_order>1</sort_order>
+						   <show_in_default>1</show_in_default>
+						   <show_in_website>1</show_in_website>
+						   <show_in_store>1</show_in_store>
+						   <comment>Maximum Records Sync per Run</comment>
+						   <validate>required-entry validate-digits-range digits-range-10-2000</validate>
+					   </maximum_records>
+					   <customer_data_fields translate="label" module="webdawe_vero">
+						   <label>Customer Data Fields</label>
+						   <frontend_type>multiselect</frontend_type>
+						   <source_model>webdawe_vero/adminhtml_source_customer_attributes</source_model>
+						   <sort_order>2</sort_order>
+						   <show_in_default>2</show_in_default>
+						   <show_in_website>1</show_in_website>
+						   <show_in_store>1</show_in_store>
+						   <comment>selected attributes will be synced to Vero</comment>
+					   </customer_data_fields>
+					   <customer_address_fields translate="label" module="webdawe_vero">
+						   <label>Customer Address Fields</label>
+						   <frontend_type>multiselect</frontend_type>
+						   <source_model>webdawe_vero/adminhtml_source_customer_address_attributes</source_model>
+						   <sort_order>3</sort_order>
+						   <show_in_default>1</show_in_default>
+						   <show_in_website>1</show_in_website>
+						   <show_in_store>1</show_in_store>
+						   <comment>selected attributes will be synced to Vero</comment>
+					   </customer_address_fields>
+					   <order_data_fields translate="label" module="webdawe_vero">
+						   <label>Order Data Fields</label>
+						   <frontend_type>multiselect</frontend_type>
+						   <source_model>webdawe_vero/adminhtml_source_order_fields</source_model>
+						   <sort_order>4</sort_order>
+						   <show_in_default>1</show_in_default>
+						   <show_in_website>1</show_in_website>
+						   <show_in_store>1</show_in_store>
+						   <comment>selected fields will be synced to Vero</comment>
+					   </order_data_fields>
+					   <quote_data_fields translate="label" module="webdawe_vero">
+						   <label>Quote Data Fields</label>
+						   <frontend_type>multiselect</frontend_type>
+						   <source_model>webdawe_vero/adminhtml_source_quote_fields</source_model>
+						   <sort_order>5</sort_order>
+						   <show_in_default>1</show_in_default>
+						   <show_in_website>1</show_in_website>
+						   <show_in_store>1</show_in_store>
+						   <comment>selected fields will be synced to Vero</comment>
+					   </quote_data_fields>
+				   </fields>
+			   </sync_settings>
+				<notification_settings>
+					<label>Notification Settings</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>4</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<notify_success_emails translate="label" module="webdawe_vero">
+							<label>Notify Success Emails</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Comma Separated List of emails to be notified for every successful import</comment>
+						</notify_success_emails>
+						<notify_error_emails translate="label" module="webdawe_vero">
+							<label>Notify Failure Emails</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Comma Separated List of emails to be notified for every failure import</comment>
+						</notify_error_emails>
+					</fields>
+				</notification_settings>
+			</groups>
+		</webdawe_vero>
+	  </sections>
+</config>

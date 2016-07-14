@@ -1,0 +1,286 @@
+<?xml version="1.0"?>
+	<config>
+		<modules>
+			<Webdawe_Vero>
+				<version>1.0.0</version>
+			</Webdawe_Vero>
+		</modules>
+		<global>
+			<blocks>
+				<webdawe_vero>
+					<class>Webdawe_Vero_Block</class>
+				</webdawe_vero>
+				<webdawe_vero_adminhtml>
+					<class>Webdawe_Vero_Block_Adminhtml</class>
+				</webdawe_vero_adminhtml>
+			</blocks>
+			<helpers>
+				<webdawe_vero>
+					<class>Webdawe_Vero_Helper</class>
+				</webdawe_vero>
+			</helpers>
+		   <models>
+				<webdawe_vero>
+					<class>Webdawe_Vero_Model</class>
+					<resourceModel>webdawe_vero_resource</resourceModel>
+				</webdawe_vero>
+				<webdawe_vero_resource>
+					<class>Webdawe_Vero_Model_Resource</class>
+				   <entities>
+					   <customer>
+						   <table>webdawe_vero_customer</table>
+					   </customer>
+					   <customer_import_history>
+						   <table>webdawe_vero_customer_import_history</table>
+					   </customer_import_history>
+						<order>
+							<table>webdawe_vero_order_queue</table>
+					   </order>
+					   <order_import_history>
+						   <table>webdawe_vero_order_import_history</table>
+					   </order_import_history>
+					   <quote>
+							<table>webdawe_vero_quote_queue</table>
+					   </quote>
+					   <quote_import_history>
+						   <table>webdawe_vero_quote_import_history</table>
+					   </quote_import_history>
+				   </entities>
+				</webdawe_vero_resource>
+			</models>
+			<resources>
+				<webdawe_vero_setup>
+					<setup>
+						<module>Webdawe_Vero</module>
+					</setup>
+				</webdawe_vero_setup>
+				<webdawe_vero_write>
+					<connection>
+						<use>default_write</use>
+					</connection>
+				</webdawe_vero_write>
+				<webdawe_vero_read>
+					<connection>
+						<use>default_read</use>
+					</connection>
+				</webdawe_vero_read>
+			</resources>
+			<events>
+				<customer_save_after>
+					<observers>
+						<webdawe_vero_customer_save_after>
+							<type>singleton</type>
+							<class>Webdawe_Vero_Model_Observer</class>
+							<method>onCustomerSaveAfter</method>
+						</webdawe_vero_customer_save_after>
+					</observers>
+				</customer_save_after>
+				<newsletter_subscriber_save_after>
+					<observers>
+						<webdawe_vero_subscriber_save_after>
+							<type>singleton</type>
+							<class>Webdawe_Vero_Model_Observer</class>
+							<method>onSubscriberSaveAfter</method>
+						</webdawe_vero_subscriber_save_after>
+					</observers>
+				</newsletter_subscriber_save_after>
+				<customer_delete_after>
+					<observers>
+						<webdawe_vero_delete_after>
+							<type>singleton</type>
+							<class>Webdawe_Vero_Model_Observer</class>
+							<method>onCustomerDeleteAfter</method>
+						</webdawe_vero_delete_after>
+					</observers>
+				</customer_delete_after>
+				<sales_convert_quote_to_order>
+					<observers>
+						<webdawe_vero_quote_to_order>
+							<class>Webdawe_Vero_Model_Observer</class>
+							<type>singleton</type>
+							<method>onQuoteToOrder</method>
+						</webdawe_vero_quote_to_order>
+					</observers>
+				</sales_convert_quote_to_order>
+				<sales_quote_save_after>
+					<observers>
+						<webdawe_vero_quote_save_after>
+							<type>singleton</type>
+							<class>Webdawe_Vero_Model_Observer</class>
+							<method>onQuoteSaveAfter</method>
+						</webdawe_vero_quote_save_after>
+					</observers>
+				</sales_quote_save_after>
+				<rewards_points_indexer_update>
+					<observers>
+						<webdawe_vero_rewards_points_indexer_update>
+							<type>singleton</type>
+							<class>Webdawe_Vero_Model_Observer</class>
+							<method>onRewardPointsIndexerUpdate</method>
+						</webdawe_vero_rewards_points_indexer_update>
+					</observers>
+				</rewards_points_indexer_update>
+				<ontic_sales_paypal_payment_complete>
+					<observers>
+						<webdawe_vero_order_after_paypal_payment>
+							<type>singleton</type>
+							<class>Webdawe_Vero_Model_Observer</class>
+							<method>onPaypalPayment</method>
+						</webdawe_vero_order_after_paypal_payment>
+					</observers>
+				</ontic_sales_paypal_payment_complete>
+				<sales_order_invoice_pay>
+					<observers>
+						<webdawe_vero_order_after_invoice_payment>
+							<type>singleton</type>
+							<class>Webdawe_Vero_Model_Observer</class>
+							<method>onInvoicePayment</method>
+						</webdawe_vero_order_after_invoice_payment>
+					</observers>
+				</sales_order_invoice_pay>
+			</events>
+			<template>
+				<email>
+					<webdawe_vero_notification translate="label" module="webdawe_vero">
+						<label>Webdawe Vero Notification</label>
+						<file>webdawe/vero/vero_notification.html</file>
+						<type>html</type>
+					</webdawe_vero_notification>
+				</email>
+			</template>
+		</global>
+		<admin>
+			<routers>
+				<adminhtml>
+					<args>
+						<modules>
+							<Webdawe_Vero before="Mage_Adminhtml">Webdawe_Vero_Adminhtml</Webdawe_Vero>
+						</modules>
+					</args>
+				</adminhtml>
+			</routers>
+		</admin>
+		<adminhtml>
+			<menu>
+			  <webdawe_vero module="webdawe_vero">
+				<title>Vero</title>
+				<sort_order>100</sort_order>
+				<children>
+					<customer module="webdawe_vero">
+						<title>Customer</title>
+						<sort_order>0</sort_order>
+						<action>adminhtml/vero_customer</action>
+						<children>
+							<customer_list module="webdawe_vero">
+								<title>List</title>
+								<sort_order>0</sort_order>
+								<action>adminhtml/vero_customer</action>
+							</customer_list>
+							<customer_history module="webdawe_vero">
+								<title>Import History</title>
+								<sort_order>1</sort_order>
+								<action>adminhtml/vero_customer_history</action>
+							</customer_history>
+						</children>
+					</customer>
+
+					<order_queue module="webdawe_vero">
+						<title>Order Queue</title>
+						<sort_order>1</sort_order>
+						<action>adminhtml/vero_order</action>
+					</order_queue>
+					<quote_queue module="webdawe_vero">
+						<title>Quote Queue</title>
+						<sort_order>2</sort_order>
+						<action>adminhtml/vero_quote</action>
+					</quote_queue>
+					<configuration translate="title" module="webdawe_vero">
+						<title>Configuration</title>
+						<sort_order>1000</sort_order>
+						<action>adminhtml/system_config/edit/section/webdawe_vero</action>
+						<resource>system/config/webdawe_vero</resource>
+					</configuration>
+				</children>
+			  </webdawe_vero>
+			</menu>
+			<acl>
+			  <resources>
+				<all>
+				  <title>Allow Everything</title>
+				</all>
+				<admin>
+				  <children>
+				  <webdawe_vero translate="title" module="webdawe_vero">
+					  <title>Vero</title>
+					  <sort_order>1000</sort_order>
+					  <children>
+						  <customer translate="title">
+							<title>Customer</title>
+							<sort_order>0</sort_order>
+							<children>
+								<customer_list module="webdawe_vero">
+									<title>List</title>
+									<sort_order>0</sort_order>
+								</customer_list>
+								<customer_history translate="title">
+									<title>Import History</title>
+									<sort_order>1</sort_order>
+								</customer_history>
+							</children>
+						  </customer>
+
+						  <order_queue translate="title">
+							<title>Order Queue</title>
+							<sort_order>10</sort_order>
+						  </order_queue>
+						  <quote_queue translate="title">
+							<title>Quote Queue</title>
+							<sort_order>20</sort_order>
+						  </quote_queue>
+						  <configuration translate="title">
+							  <title>Configuration</title>
+							  <sort_order>20</sort_order>
+						  </configuration>
+						</children>
+					</webdawe_vero>
+				  </children>
+				</admin>
+			  </resources>
+			</acl>
+			<layout>
+			  <updates>
+				<webdawe_vero>
+				  <file>webdawe/vero.xml</file>
+				</webdawe_vero>
+			  </updates>
+			</layout>
+		</adminhtml>
+		<crontab>
+			<jobs>
+				<webdawe_vero_customer_sync>
+					<schedule><cron_expr>*/5 * * * *</cron_expr></schedule>
+					<run><model>webdawe_vero/cron::customerSync</model></run>
+				</webdawe_vero_customer_sync>
+				<!--<webdawe_vero_quote_sync>
+					<schedule><cron_expr>*/5 * * * *</cron_expr></schedule>
+					<run><model>>webdawe_vero/cron::quoteSync</model></run>
+				</webdawe_vero_quote_sync>
+				<webdawe_vero_order_sync>
+					<schedule><cron_expr>*/5 * * * *</cron_expr></schedule>
+					<run><model>webdawe_vero/cron::orderSync</model></run>
+				</webdawe_vero_order_sync>-->
+			</jobs>
+		</crontab>
+		<default>
+			<webdawe_vero>
+				<general>
+					<enabled>0</enabled>
+					<debug>0</debug>
+				</general>
+				<sync_settings>
+					<maximum_attempts>3</maximum_attempts>
+					<maximum_records>20</maximum_records>
+				</sync_settings>
+			</webdawe_vero>
+		</default>
+</config>

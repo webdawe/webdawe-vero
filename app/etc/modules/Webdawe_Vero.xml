@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+     <modules>
+        <Webdawe_Vero>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Webdawe_Vero>
+     </modules>
+</config>
