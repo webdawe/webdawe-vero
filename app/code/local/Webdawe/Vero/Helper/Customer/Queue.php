@@ -13,8 +13,6 @@ class Webdawe_Vero_Helper_Customer_Queue extends Webdawe_Vero_Helper_Abstract
     private $_customerAttributes = array();
     private $_customerAddressAttributes = array();
 
-    const GROUP_FUNDRAISER = 'Fundraiser';
-
     /**
      * Retrieve Vero Customer Model According to the Object Passing
      * @param Mage_Customer_Model_Customer | Mage_Newsletter_Model_Subscriber | Mage_Sales_Model_Order $object
@@ -214,32 +212,6 @@ class Webdawe_Vero_Helper_Customer_Queue extends Webdawe_Vero_Helper_Abstract
             catch (Exception $error)
             {
                 Mage::log('Exception while saving the Vero Customer on trasactional:' . $error->getMessage(), null, 'vero.log');
-            }
-        }
-
-        //Add Fundraiser Customer to the Vero Customer if they have earned points
-        if ($fundraiserId = $order->getFundraiserId())
-        {
-            $fundraiser = Mage::getModel('ontic_fundraiser/fundraiser')->load($fundraiserId);
-
-            if ($customerId = $fundraiser->getCustomerId())
-            {
-                $customer = Mage::getModel('customer/customer')->load($customerId);
-                $veroCustomer  = $this->getVeroCustomerModel($customer);
-                //set import status and priority
-                $veroCustomer->setIsImported(Webdawe_Vero_Model_Customer::YESNO_NO);
-                $veroCustomer->setPriority(Webdawe_Vero_Model_Customer::PRIORITY_HIGH);
-
-                $veroCustomer->setAction(Webdawe_Vero_Model_Customer::ACTION_REWARDS);
-
-                try
-                {
-                    $veroCustomer->save();
-                }
-                catch (Exception $error)
-                {
-                    Mage::log('Exception while saving the Vero Customer on fundraiser points donation:' . $error->getMessage(), null, 'vero.log');
-                }
             }
         }
 
@@ -455,45 +427,12 @@ class Webdawe_Vero_Helper_Customer_Queue extends Webdawe_Vero_Helper_Abstract
         $customerAttributes['website_name'] =  $websiteName;
         $customerAttributes['store_name'] =$storeName;
 
-        //retrieve Fundraiser Properties
-        $fundraiserProperties = array();
-
-        if ($customerAttributes['customer_group'] == self::GROUP_FUNDRAISER)
-        {
-            $fundraiserProperties = $this->getFundraiserProperties($customer);
-        }
-
-        $customerProperties = array_merge($customerAttributes, $customerBillingAttributes, $customerShippingAttributes, $rewardsProperties, $fundraiserProperties);
+        $customerProperties = array_merge($customerAttributes, $customerBillingAttributes, $customerShippingAttributes, $rewardsProperties);
 
         $this->_showDebug('Customer Properties', $customerProperties);
         return $customerProperties;
     }
 
-    /**
-     * Retrieve Fundraiser Properties
-     * @param Mage_Customer_Model_Customer $customer
-     * @return array
-     */
-    public function getFundraiserProperties(Mage_Customer_Model_Customer $customer)
-    {
-        $fundraiserProperties = array();
-        $fundraiserCollection = Mage::getResourceModel('ontic_fundraiser/fundraiser_collection')->addFieldToFilter('customer_id', $customer->getId());
-        $fundraiserCollection->addGroupNameToSelect();
-
-
-        $fundraiser = $fundraiserCollection->getFirstItem();
-
-        if ($fundraiser->getFundraiserId())
-        {
-            $fundraiserProperties['fundraiser_id'] = $fundraiser->getFundraiserId();
-            $fundraiserProperties['fundraiser_group'] = $fundraiser->getGroupName();
-            $fundraiserProperties['fundraiser_name'] = $fundraiser->getBusinessName();
-        }
-
-        $this->_showDebug('Fundraiser Properties', $fundraiserProperties);
-
-        return $fundraiserProperties;
-    }
 
     /**
      * Retrieve Billing Address FROM order
