@@ -1,0 +1,17 @@
+{
+    "name":"webdawe/vero-magento-module",
+    "type":"magento-module",
+    "license":"BSD3",
+    "homepage":"https://github.com/webdawe/webdawe-vero-magento-module",
+    "description":"Magento 1 Module for Import Customer Properties and Events to Vero",
+    "minimum-stability":"stable",
+    "authors":[
+        {
+            "name":"Anil Paul",
+            "email":"webdeveloper363@gmail.com"
+        }
+    ],
+    "require" : {
+        "ecomdev/ecomdev_phpunit": "*"
+    }
+}
