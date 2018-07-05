@@ -11,7 +11,10 @@
             "email":"webdeveloper363@gmail.com"
         }
     ],
-    "require" : {
-        "ivanchepurnyi/ecomdev_phpunit": "*"
+    "require-dev": {
+        "magento/core": "1.9.0.1",
+        "ecomdev/ecomdev_phpunit": "dev-dev",
+        "mikey179/vfsStream": "*",
+        "ecomdev/mage-ci": "*"
     }
 }
